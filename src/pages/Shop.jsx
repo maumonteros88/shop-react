@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { Card, Col, Row, Image, Button } from "antd";
+import { Card, Col, Row, Image, Button, notification, Popconfirm, message } from "antd";
 import { UseCart } from "../provider/CardProvider";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router";
 
 const { Meta } = Card;
@@ -21,14 +21,44 @@ const Shop = () => {
     }
   }, [cart]);
 
-  const handleDeleteAll = () => {
+  const handleDeleteAll = (key) => {
     deleteAllCart();
+    notification.close(key);
+  };
+
+  const handleSendMessage=()=>{
+    message.info('El carrito no se borrara')
+  }
+
+  const openNotification = () => {
+    const key = "open";
+    const btn = (
+      <Button
+        danger
+        type="primary"
+        size="small"
+        onClick={() => handleDeleteAll(key)}>
+        Confirmar
+      </Button>
+    );
+    notification.open({
+      message: "Esta seguro de borrar?",
+      description:
+        "Recuerde que si confirma, se eliminara todos los productos que selecciono",
+      btn,
+      key,
+      onClose: handleSendMessage,
+    });
   };
   return (
     <Row gutter={[16, 16]}>
       <Col span={24} lg={{ span: 24 }}>
         <Row justify="end">
-          <Button onClick={handleDeleteAll} danger type="primary">
+          <Button
+            icon={<ShoppingCartOutlined />}
+            onClick={openNotification}
+            danger
+            type="primary">
             Borrar todo el carrito
           </Button>
         </Row>
@@ -51,10 +81,17 @@ const Shop = () => {
                 />
               }
               actions={[
-                <DeleteOutlined
-                  style={{ fontSize: "26px", color: "red" }}
-                  onClick={() => handleDelete(product.id)}
-                />,
+                <>
+                  <Popconfirm
+                    title="Esta seguro que desea borrar este producto?"
+                    onConfirm={() => handleDelete(product.id)}
+                    okText="Si"
+                    cancelText="No">
+                    <DeleteOutlined
+                      style={{ fontSize: "26px", color: "red" }}
+                    />
+                  </Popconfirm>
+                </>,
               ]}>
               <Meta
                 title={product.title}

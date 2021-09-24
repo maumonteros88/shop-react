@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Home from '../../../pages/Home';
-import About from '../../../pages/About'
-import Shop from '../../../pages/Shop';
-import Detail from '../../../pages/Detail';
+import Home from "../../../pages/Home";
+import About from "../../../pages/About";
+import Shop from "../../../pages/Shop";
+import Detail from "../../../pages/Detail";
 
 const RoutesNavBar = () => {
   return (
@@ -17,11 +17,11 @@ const RoutesNavBar = () => {
       <Route path="/about">
         <About />
       </Route>
-      <Route exact path="/">
+      <Route path="/">
         <Home />
       </Route>
     </Switch>
-  )
-}
+  );
+};
 
-export default RoutesNavBar
+export default RoutesNavBar;

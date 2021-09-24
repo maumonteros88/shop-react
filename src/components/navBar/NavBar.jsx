@@ -2,8 +2,8 @@ import React from "react";
 import { Layout, Menu, Badge } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import RoutesNavBar from "./routes/RoutesNavBar";
 import { UseCart } from "../../provider/CardProvider";
+import RoutesNavBar from "./routes/RoutesNavBar";
 
 const { Header, Content, Footer } = Layout;
 

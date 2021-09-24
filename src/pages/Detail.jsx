@@ -1,3 +1,4 @@
+import { ShoppingOutlined } from "@ant-design/icons";
 import { Col, Row, Image, message, Skeleton, Divider, Button } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -90,7 +91,10 @@ const Detail = () => {
           />
           <div style={{ marginTop: 50, alignItems: "center" }}>
             {counter !== 0 && (
-              <Button type="primary" onClick={handleAdd}>
+              <Button
+                icon={<ShoppingOutlined />}
+                type="primary"
+                onClick={handleAdd}>
                 Agregar al carrito
               </Button>
             )}
