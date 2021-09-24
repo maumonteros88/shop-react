@@ -19,7 +19,7 @@ const Detail = () => {
   const [dataProducto, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [counter, setCounter] = useState(0);
-  
+
   const { AddToCart } = UseCart();
 
   const { id } = useParams();
@@ -64,7 +64,7 @@ const Detail = () => {
       }
     };
     handleGetProducts();
-  }, []);
+  }, [id]);
 
   if (isLoading)
     return (

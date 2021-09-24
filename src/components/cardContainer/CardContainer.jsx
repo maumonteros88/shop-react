@@ -7,14 +7,11 @@ const CardContainer = () => {
   const [dataproducto, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(dataproducto);
   useEffect(() => {
     const handleGetProducts = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          "https://fakestoreapi.com/products"
-        );
+        const response = await axios.get("https://fakestoreapi.com/products");
         setData(response.data);
       } catch (error) {
         message.error("Error al consultar productos");
@@ -39,8 +36,8 @@ const CardContainer = () => {
   return (
     <Row gutter={[16, 16]} justify="center">
       {dataproducto.map((product) => (
-        <div style={{ marginTop: 20 }}>
-          <Col key={product.id}>
+        <div key={product.id} style={{ marginTop: 20 }}>
+          <Col>
             <Item product={product} isLoading={isLoading} />
           </Col>
         </div>

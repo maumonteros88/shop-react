@@ -28,7 +28,7 @@ const Shop = () => {
     if (cart.length === 0) {
       history.push("/");
     }
-  }, [cart]);
+  }, [cart, history]);
 
   const handleDeleteAll = (key) => {
     deleteAllCart();
@@ -76,8 +76,8 @@ const Shop = () => {
         </div>
       </Col>
       {cart.map((product) => (
-        <div style={{ marginTop: 20 }}>
-          <Col key={product.id}>
+        <div key={product.id} style={{ marginTop: 20 }}>
+          <Col>
             <Card
               style={{ width: 300 }}
               cover={
