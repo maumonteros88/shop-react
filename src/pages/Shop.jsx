@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { Card, Col, Row, Image, Button } from "antd";
 import { UseCart } from "../provider/CardProvider";
-import Item from "../components/card/Item";
 import { DeleteOutlined } from "@ant-design/icons";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 
 const { Meta } = Card;
 
