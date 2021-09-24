@@ -10,20 +10,20 @@ export const CarritoContexto = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const AddToCart = (obj) => {
-    if (!IsIn(obj)) {
+    if (!IsIn(obj.id)) {
       setCart([...cart, obj]);
     } else {
       cart.forEach((product, index) => {
-        if (cart[index].id === obj.id) {
-          cart[index].amount = cart[index].amount + obj.amount;
+        if (product.id === obj.id) {
+          cart[index].amount = product.amount + obj.amount;
           setCart([...cart]);
         }
       });
     }
   };
 
-  const IsIn = (obj) => {
-    const isIqual = cart.find((product) => product.id === obj.id);
+  const IsIn = (id) => {
+    const isIqual = cart.find((product) => product.id === id);
     return isIqual === undefined ? false : true;
   };
 
@@ -40,9 +40,9 @@ export const CarritoContexto = ({ children }) => {
     return total;
   };
 
-  const deleteAllCart =()=>{
-    setCart([])
-  }
+  const deleteAllCart = () => {
+    setCart([]);
+  };
 
   return (
     <CartContexto.Provider
@@ -51,7 +51,7 @@ export const CarritoContexto = ({ children }) => {
         AddToCart,
         removeItemFromArr,
         CalculatePrice,
-        deleteAllCart
+        deleteAllCart,
       }}>
       {children}
     </CartContexto.Provider>

@@ -7,12 +7,13 @@ const CardContainer = () => {
   const [dataproducto, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log(dataproducto);
   useEffect(() => {
     const handleGetProducts = async () => {
       try {
         setIsLoading(true);
         const response = await axios.get(
-          "https://fakestoreapi.com/products?limit=15"
+          "https://fakestoreapi.com/products"
         );
         setData(response.data);
       } catch (error) {
@@ -36,7 +37,7 @@ const CardContainer = () => {
     );
 
   return (
-    <Row gutter={[16, 16]}>
+    <Row gutter={[16, 16]} justify="center">
       {dataproducto.map((product) => (
         <div style={{ marginTop: 20 }}>
           <Col key={product.id}>

@@ -1,5 +1,14 @@
 import { ShoppingOutlined } from "@ant-design/icons";
-import { Col, Row, Image, message, Skeleton, Divider, Button } from "antd";
+import {
+  Col,
+  Row,
+  Image,
+  message,
+  Skeleton,
+  Divider,
+  Button,
+  Rate,
+} from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
@@ -10,14 +19,19 @@ const Detail = () => {
   const [dataProducto, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [counter, setCounter] = useState(0);
-  const { cart, AddToCart, removeAllCart } = UseCart();
+  
+  const { AddToCart } = UseCart();
 
   const { id } = useParams();
   let history = useHistory();
 
   const handleAgregar = () => {
-    const value = counter + 1;
-    setCounter(value);
+    if (counter < dataProducto[0]?.rating.count) {
+      const value = counter + 1;
+      setCounter(value);
+    } else {
+      message.warning("ha llegado al maximo stock");
+    }
   };
   const handleQuitar = () => {
     if (counter > 0) {
@@ -37,9 +51,7 @@ const Detail = () => {
     const handleGetProducts = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          "https://fakestoreapi.com/products?limit=15"
-        );
+        const response = await axios.get("https://fakestoreapi.com/products");
         const takeResponse = response.data;
         const filterProduct = takeResponse.filter(
           (product) => product.id === parseInt(id)
@@ -85,6 +97,9 @@ const Detail = () => {
           <Divider />
           <h3>{`Precio: $${dataProducto[0]?.price}`}</h3>
           <h3>{`Cantidad: ${counter}`}</h3>
+          <h3>{`Stock: ${dataProducto[0]?.rating.count}`}</h3>
+          <Rate allowHalf defaultValue={dataProducto[0]?.rating.rate} />
+          <Divider />
           <ItemCounter
             handleAgregar={handleAgregar}
             handleQuitar={handleQuitar}

@@ -4,6 +4,7 @@ import Home from "../../../pages/Home";
 import About from "../../../pages/About";
 import Shop from "../../../pages/Shop";
 import Detail from "../../../pages/Detail";
+import Products from "../../../pages/Products";
 
 const RoutesNavBar = () => {
   return (
@@ -16,6 +17,9 @@ const RoutesNavBar = () => {
       </Route>
       <Route path="/about">
         <About />
+      </Route>
+      <Route path="/productos">
+        <Products />
       </Route>
       <Route path="/">
         <Home />

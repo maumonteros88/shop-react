@@ -1,6 +1,7 @@
-import { Card, Image } from "antd";
+import { Card, Image, Rate } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router";
+import React from "react";
 
 const { Meta } = Card;
 
@@ -25,7 +26,8 @@ const Item = ({ product, isLoading }) => {
       actions={[
         <SearchOutlined style={{ fontSize: "26px" }} onClick={()=>handleDetail(product.id)} />,
       ]}>
-      <Meta title={product.title} description={`Precio: ${product.price}`} />
+      <Meta title={product.title} description={`Precio: $${product.price}`} />
+      <Rate allowHalf  disabled value={product.rating.rate} />
     </Card>
   );
 };
