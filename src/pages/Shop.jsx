@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
-import { Card, Col, Row, Image, Button, notification, Popconfirm, message } from "antd";
+import {
+  Card,
+  Col,
+  Row,
+  Image,
+  Button,
+  notification,
+  Popconfirm,
+  message,
+} from "antd";
 import { UseCart } from "../provider/CardProvider";
 import { DeleteOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router";
@@ -26,9 +35,9 @@ const Shop = () => {
     notification.close(key);
   };
 
-  const handleSendMessage=()=>{
-    message.info('El carrito no se borrara')
-  }
+  const handleSendMessage = () => {
+    message.info("El carrito no se borrara");
+  };
 
   const openNotification = () => {
     const key = "open";
@@ -93,13 +102,10 @@ const Shop = () => {
                   </Popconfirm>
                 </>,
               ]}>
-              <Meta
-                title={product.title}
-                description={`Precio: ${product.price}`}
-              />
+              <Meta title={product.title} />
+              <p>{`Precio: $${product.price}`}</p>
               <p>{`Cantidad: ${product.amount}`}</p>
-
-              <p>{`Total: ${(product.amount * product.price).toFixed(2)}`}</p>
+              <p>{`Total: $${(product.amount * product.price).toFixed(2)}`}</p>
             </Card>
           </Col>
         </div>
