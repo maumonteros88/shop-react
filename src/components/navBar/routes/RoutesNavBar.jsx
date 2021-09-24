@@ -3,10 +3,14 @@ import { Route, Switch } from "react-router-dom";
 import Home from '../../../pages/Home';
 import About from '../../../pages/About'
 import Shop from '../../../pages/Shop';
+import Detail from '../../../pages/Detail';
 
 const RoutesNavBar = () => {
   return (
     <Switch>
+      <Route path="/detalles/:id">
+        <Detail />
+      </Route>
       <Route path="/carrito">
         <Shop />
       </Route>

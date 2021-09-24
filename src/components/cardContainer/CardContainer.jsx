@@ -1,4 +1,4 @@
-import { Row, Col, message } from "antd";
+import { Row, Col, message, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Item from "../card/Item";
@@ -23,6 +23,17 @@ const CardContainer = () => {
     };
     handleGetProducts();
   }, []);
+
+  if (isLoading)
+    return (
+      <Row justify="center">
+        <Col span={24}>
+          <div style={{height:'100'}}>
+            <Skeleton avatar paragraph={{ rows: 4 }} />
+          </div>
+        </Col>
+      </Row>
+    );
 
   return (
     <Row gutter={[16, 16]}>

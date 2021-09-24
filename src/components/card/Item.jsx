@@ -1,10 +1,14 @@
 import { Card, Image } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router";
 
 const { Meta } = Card;
 
 const Item = ({ product, isLoading }) => {
-  const handleDetail = () => {};
+  let history = useHistory();
+  const handleDetail = (id) => {
+    history.push(`/detalles/${id}`);
+  };
   return (
     <Card
       loading={isLoading}
@@ -19,7 +23,7 @@ const Item = ({ product, isLoading }) => {
         />
       }
       actions={[
-        <SearchOutlined style={{ fontSize: "26px" }} onClick={handleDetail} />,
+        <SearchOutlined style={{ fontSize: "26px" }} onClick={()=>handleDetail(product.id)} />,
       ]}>
       <Meta title={product.title} description={`Precio: ${product.price}`} />
     </Card>
