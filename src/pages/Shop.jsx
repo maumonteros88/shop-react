@@ -1,20 +1,38 @@
-import React from "react";
-import { Card, Col, Row, Image } from "antd";
+import React, { useEffect } from "react";
+import { Card, Col, Row, Image, Button } from "antd";
 import { UseCart } from "../provider/CardProvider";
 import Item from "../components/card/Item";
 import { DeleteOutlined } from "@ant-design/icons";
+import { Redirect, useHistory } from "react-router";
 
 const { Meta } = Card;
 
 const Shop = () => {
-  const { cart, CalculatePrice, removeItemFromArr } = UseCart();
+  const { cart, CalculatePrice, removeItemFromArr, deleteAllCart } = UseCart();
+
+  let history = useHistory();
 
   const handleDelete = (id) => {
     removeItemFromArr(id);
   };
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      history.push("/");
+    }
+  }, [cart]);
+
+  const handleDeleteAll = () => {
+    deleteAllCart();
+  };
   return (
     <Row gutter={[16, 16]}>
       <Col span={24} lg={{ span: 24 }}>
+        <Row justify="end">
+          <Button onClick={handleDeleteAll} danger type="primary">
+            Borrar todo el carrito
+          </Button>
+        </Row>
         <div style={{ marginTop: 20 }}>
           <h1>{`Total del carrito: $${CalculatePrice().toFixed(2)} `}</h1>
         </div>
