@@ -28,8 +28,8 @@ const CardContainer = () => {
     return (
       <Row justify="center">
         <Col span={24}>
-          <div style={{height:'100'}}>
-            <Skeleton avatar paragraph={{ rows: 4 }} />
+          <div style={{ height: "100", marginTop: 50 }}>
+            <Skeleton avatar paragraph={{ rows: 15 }} />
           </div>
         </Col>
       </Row>
@@ -38,9 +38,11 @@ const CardContainer = () => {
   return (
     <Row gutter={[16, 16]}>
       {dataproducto.map((product) => (
-        <Col key={product.id}>
-          <Item product={product} isLoading={isLoading} />
-        </Col>
+        <div style={{ marginTop: 20 }}>
+          <Col key={product.id}>
+            <Item product={product} isLoading={isLoading} />
+          </Col>
+        </div>
       ))}
     </Row>
   );

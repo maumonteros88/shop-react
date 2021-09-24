@@ -1,8 +1,13 @@
 import "./App.css";
 import Routes from "./routes/Routes";
+import { CarritoContexto } from "./provider/CardProvider";
 
 function App() {
-  return <Routes />;
+  return (
+    <CarritoContexto>
+      <Routes />
+    </CarritoContexto>
+  );
 }
 
 export default App;

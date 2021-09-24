@@ -1,14 +1,37 @@
-import { Col, Row, Image, message, Skeleton, Divider } from "antd";
+import { Col, Row, Image, message, Skeleton, Divider, Button } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
+import ItemCounter from "../components/itemCounter/ItemCounter";
+import { UseCart } from "../provider/CardProvider";
 
 const Detail = () => {
   const [dataProducto, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [counter, setCounter] = useState(0);
+  const { cart, AddToCart, removeAllCart } = UseCart();
 
   const { id } = useParams();
-  console.log(dataProducto);
+  let history = useHistory();
+
+  const handleAgregar = () => {
+    const value = counter + 1;
+    setCounter(value);
+  };
+  const handleQuitar = () => {
+    if (counter > 0) {
+      const value = counter - 1;
+      setCounter(value);
+    }
+  };
+
+  const handleAdd = () => {
+    const dataToSend = { ...dataProducto[0], amount: counter };
+    AddToCart(dataToSend);
+    message.success("Producto agregado", 3);
+    history.push("/carrito");
+  };
+
   useEffect(() => {
     const handleGetProducts = async () => {
       try {
@@ -33,14 +56,18 @@ const Detail = () => {
   if (isLoading)
     return (
       <Row justify="center">
-        <Skeleton avatar paragraph={{ rows: 4 }} />
+        <Col span={24}>
+          <div style={{ height: "100", marginTop: 50 }}>
+            <Skeleton avatar paragraph={{ rows: 15 }} />
+          </div>
+        </Col>
       </Row>
     );
 
   return (
     <Row justify="center">
       <Col span={24} lg={{ span: 12 }}>
-        <div>
+        <div style={{ marginTop: 20 }}>
           <Image
             style={{ objectFit: "scale-down", alignItems: "center" }}
             width={600}
@@ -50,10 +77,24 @@ const Detail = () => {
         </div>
       </Col>
       <Col span={24} lg={{ span: 12 }}>
-        <div>
+        <div style={{ marginTop: 20 }}>
           <h1>{dataProducto[0]?.title}</h1>
-          <Divider/>
+          <Divider />
           <h3>{dataProducto[0]?.description}</h3>
+          <Divider />
+          <h3>{`Precio: $${dataProducto[0]?.price}`}</h3>
+          <h3>{`Cantidad: ${counter}`}</h3>
+          <ItemCounter
+            handleAgregar={handleAgregar}
+            handleQuitar={handleQuitar}
+          />
+          <div style={{ marginTop: 50, alignItems: "center" }}>
+            {counter !== 0 && (
+              <Button type="primary" onClick={handleAdd}>
+                Agregar al carrito
+              </Button>
+            )}
+          </div>
         </div>
       </Col>
     </Row>

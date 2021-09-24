@@ -3,10 +3,12 @@ import { Layout, Menu, Badge } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import RoutesNavBar from "./routes/RoutesNavBar";
+import { UseCart } from "../../provider/CardProvider";
 
 const { Header, Content, Footer } = Layout;
 
 const NavBar = () => {
+  const { cart } = UseCart();
   return (
     <>
       <Layout className="layout">
@@ -21,7 +23,7 @@ const NavBar = () => {
             </Menu.Item>
             <Menu.Item key="shop">
               <Link to="/carrito">
-                <Badge count={5}>
+                <Badge count={cart ? cart.length : null}>
                   <ShoppingCartOutlined
                     style={{ fontSize: "20px", color: "white" }}
                   />
