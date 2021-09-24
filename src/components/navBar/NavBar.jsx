@@ -13,13 +13,13 @@ const NavBar = () => {
         <Header>
           <div className="logo" />
           <Menu theme="dark" mode="horizontal">
-            <Menu.Item>
+            <Menu.Item key="home">
               <Link to="/">Home</Link>
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item key="about">
               <Link to="/about">Quienes somos</Link>
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item key="shop">
               <Link to="/carrito">
                 <Badge count={5}>
                   <ShoppingCartOutlined
